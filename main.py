@@ -17,4 +17,4 @@ async def on_ready():
     await bot.change_presence(activity=nextcord.Game(name='your mother'))
     print(f"We have logged in as {bot.user}!")
     
-bot.run(os.getenv("TOKEN"))
+bot.run(os.getenv("DISCORD_TOKEN"))
