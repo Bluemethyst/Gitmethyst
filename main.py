@@ -14,7 +14,7 @@ bot.add_cog(Commands(bot))
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=nextcord.Game(name='your mother'))
+    await bot.change_presence(activity=nextcord.Activity(name='github requests', type=nextcord.ActivityType.listening))
     print(f"We have logged in as {bot.user}!")
     
 bot.run(os.getenv("DISCORD_TOKEN"))
