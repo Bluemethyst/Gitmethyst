@@ -21,23 +21,25 @@ bot.add_cog(Utils(bot))
 # https://github.com/Bluemethyst/Gitmethyst
 
 
-WEBHOOK_URL = "https://discord.com/api/webhooks/1206042036575277116/5xX_9E7HVfkcDOav0rXIh_2K7gXJ70DTouQP2XoWOOmqA06YZLOxW3PHRPZpRM_CpNM-"
+WEBHOOK_URL = os.getenv("DISCORD_ERROR_WEBHOOK")
 
 
-async def send_exception_notification(exc, ctx):
+async def send_exception_notification(extype, value, traceback, ctx):
     embed = {
         "title": "Unhandled Exception Occurred",
-        "color": 0xFF0000,
+        "color": 0x3346D1,
         "fields": [
+            {"name": "Type", "value": str(extype), "inline": False},
             {"name": "Context", "value": str(ctx), "inline": False},
-            {"name": "Exception", "value": str(exc), "inline": False},
+            {"name": "Exception", "value": str(value), "inline": False},
+            {"name": "Traceback", "value": str(traceback), "inline": False},
         ],
     }
 
     data = {
         "embeds": [embed],
-        "username": "Your Bot Name",
-        "avatar_url": "your_bot_avatar_url_here",
+        "username": "Gitmethyst",
+        "avatar_url": "https://raw.githubusercontent.com/Bluemethyst/Gitmethyst/master/assets/gitmethyst.png",
     }
 
     result = requests.post(
@@ -63,9 +65,9 @@ async def on_ready():
 
 
 @bot.event
-async def on_error(event, *args, **kwargs):
+async def on_application_command_error(event, *args, **kwargs):
     exc_type, exc_value, exc_traceback = sys.exc_info()
-    await send_exception_notification(exc_value, args[0])
+    await send_exception_notification(exc_type, exc_value, exc_traceback, args[0])
 
 
 bot.run(os.getenv("DISCORD_TOKEN"))
