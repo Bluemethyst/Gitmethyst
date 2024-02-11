@@ -69,13 +69,11 @@ class GithubCommands(commands.Cog):
                 value=repo.open_issues_count,
             )
             await interaction.followup.send(embed=embed)
-            log.info(
-                f"Repo command used successfully in {interaction.guild.name}, {interaction.channel.name} by {interaction.user.name}"
-            )
         except github.GithubException:
             await interaction.followup.send(
                 "That repo does not exsit! If you believe this is a mistake please contact @Bluemethyst"
             )
+        log.info(command="Repo", interaction=interaction)
 
     # ISSUES
     @nextcord.slash_command(description="Show issues on a repo")
@@ -142,11 +140,9 @@ class GithubCommands(commands.Cog):
                 description=issue_titles,
             )
             await interaction.followup.send(embed=embed)
-            log.info(
-                f"Issue command used successfully in {interaction.guild.name}, {interaction.channel.name} by {interaction.user.name}"
-            )
         except github.GithubException:
             await interaction.followup.send("Repo doesnt seem to exsist")
+        log.info(command="issues", interaction=interaction)
 
     # PULLS
     @nextcord.slash_command(description="Show pull requests on a repo")
@@ -182,13 +178,11 @@ class GithubCommands(commands.Cog):
 
             embed = nextcord.Embed(
                 url=f"https://github.com/{repo.owner.login}/{repo_name}/issues",
-                title=repo_name.capitalize(),
+                title=f"{repo_name.capitalize()} Pulls",
                 color=final_color,
                 description=pull_titles,
             )
             await interaction.followup.send(embed=embed)
-            log.info(
-                f"Pulls command used successfully in {interaction.guild.name}, {interaction.channel.name} by {interaction.user.name}"
-            )
         except github.GithubException:
             await interaction.followup.send("Repo doesnt seem to exsist")
+        log.info(command="Pulls", interaction=interaction)
