@@ -43,7 +43,6 @@ class Utils(commands.Cog):
         embed = nextcord.Embed(title=f"Latency: {latency}MS", color=0x3346D1)
         await interaction.response.send_message(embed=embed)
         log.info(command="Ping", interaction=interaction)
-        raise Exception("test")
 
     @nextcord.slash_command(description="Get information about the bot")
     async def info(self, interaction: nextcord.Interaction):
