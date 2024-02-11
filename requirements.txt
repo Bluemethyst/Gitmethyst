@@ -1,0 +1,8 @@
+colorama==0.4.6
+nextcord==2.6.0
+psutil==5.9.8
+py_cpuinfo==9.0.0
+PyGithub==2.2.0
+python-dotenv==1.0.1
+PyYAML==6.0.1
+Requests==2.31.0
